@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { Book } from '@tmo/shared/models';
 
+import { Book } from '@tmo/shared/models';
 import * as BooksActions from './books.actions';
 
 export const BOOKS_FEATURE_KEY = 'books';

@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <mat-drawer-container class="app-container" [hasBackdrop]="true">
   <mat-drawer-content>
     <header class="header">
@@ -23,13 +25,15 @@
     <div class="reading-list-container" data-testing="reading-list-container">
       <h2>
         My Reading List
-        <button mat-icon-button (click)="drawer.close()">
+        <button mat-icon-button (click)="drawer.close()" [attr.aria-label]="'close reading list'">
           <mat-icon>close</mat-icon>
         </button>
       </h2>
-      <div class="reading-list-content">
-        <tmo-reading-list></tmo-reading-list>
-      </div>
+      <aside>
+        <div class="reading-list-content">
+          <tmo-reading-list></tmo-reading-list>
+        </div>
+      </aside>  
     </div>
   </mat-drawer>
 </mat-drawer-container>

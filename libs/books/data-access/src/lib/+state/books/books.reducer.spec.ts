@@ -1,6 +1,6 @@
+import { createBook } from '@tmo/shared/testing';
 import { initialState, reducer, State } from './books.reducer';
 import * as BooksActions from './books.actions';
-import { createBook } from '@tmo/shared/testing';
 
 describe('Books Reducer', () => {
   describe('valid Books actions', () => {

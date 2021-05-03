@@ -1,10 +1,10 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
 import {
   BOOKS_FEATURE_KEY,
   booksAdapter,
   BooksPartialState,
   State
 } from './books.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const getBooksState = createFeatureSelector<BooksPartialState, State>(
   BOOKS_FEATURE_KEY
