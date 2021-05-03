@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { Book } from '@tmo/shared/models';
 
 export const searchBooks = createAction(
@@ -13,7 +14,7 @@ export const searchBooksSuccess = createAction(
 
 export const searchBooksFailure = createAction(
   '[Book Search API] Search failure',
-  props<{ error: any }>()
+  props<{ error: string | null }>()
 );
 
 export const clearSearch = createAction('[Books Search Bar] Clear Search');

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { BooksDataAccessModule } from '@tmo/books/data-access';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,9 +27,6 @@ const EXPORTS = [
     MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forChild([
-      { path: '', pathMatch: 'full', component: BookSearchComponent }
-    ]),
     BooksDataAccessModule
   ],
   exports: [...EXPORTS],

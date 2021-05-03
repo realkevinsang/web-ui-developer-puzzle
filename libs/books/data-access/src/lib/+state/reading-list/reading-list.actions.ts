@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
 import { Book, ReadingListItem } from '@tmo/shared/models';
+import { createAction, props } from '@ngrx/store';
 
 export const init = createAction('[Reading List] Initialize');
 

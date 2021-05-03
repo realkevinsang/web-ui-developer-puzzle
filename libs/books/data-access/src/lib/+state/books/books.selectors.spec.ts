@@ -1,6 +1,7 @@
 import { booksAdapter, initialState } from './books.reducer';
-import * as BooksSelectors from './books.selectors';
 import { createBook } from '@tmo/shared/testing';
+import * as BooksSelectors from './books.selectors';
+
 
 describe('Books Selectors', () => {
   let state;
