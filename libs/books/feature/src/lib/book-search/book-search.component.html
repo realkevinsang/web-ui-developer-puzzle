@@ -40,7 +40,8 @@
               [tabindex]='10+i'
               [attr.aria-label]="'add' + b.title + 'to reading list'"
             >
-              Want to Read
+              <span *ngIf="!b.finished else finished">Want to Read</span>
+              <ng-template #finished>Finished by {{b.finishedDate | date:"M/d/yyyy" }}</ng-template>
             </button>
           </div>
         </div>
