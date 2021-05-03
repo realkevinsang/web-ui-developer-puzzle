@@ -1,22 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   addToReadingList,
   clearSearch,
   getAllBooks,
   ReadingListBook,
+  removeFromReadingList,
   searchBooks
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
-import { Book } from '@tmo/shared/models';
+import { Book, ReadingListItem } from '@tmo/shared/models';
+import { Subscription } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'tmo-book-search',
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss']
 })
-export class BookSearchComponent implements OnInit {
+export class BookSearchComponent implements OnInit,OnDestroy {
   books: ReadingListBook[];
+  books$: Subscription;
 
   searchForm = this.fb.group({
     term: ''
@@ -24,7 +28,8 @@ export class BookSearchComponent implements OnInit {
 
   constructor(
     private readonly store: Store,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private _snackBar: MatSnackBar
   ) {}
 
   get searchTerm(): string {
@@ -32,9 +37,13 @@ export class BookSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(getAllBooks).subscribe(books => {
+    this.books$ = this.store.select(getAllBooks).subscribe(books => {
       this.books = books;
     });
+  }
+
+  ngOnDestroy(): void {
+    this.books$.unsubscribe()
   }
 
   formatDate(date: void | string) {
@@ -45,6 +54,14 @@ export class BookSearchComponent implements OnInit {
 
   addBookToReadingList(book: Book) {
     this.store.dispatch(addToReadingList({ book }));
+    
+    const snackBar = this._snackBar.open("added", 'Undo', {duration: 2000});
+    snackBar.onAction().subscribe(()=>{
+      const item:ReadingListItem = Object.assign({'bookId':book.id},book)
+      // console.log(item)
+      this.store.dispatch(removeFromReadingList({ item }));
+    })
+
   }
 
   searchExample() {
